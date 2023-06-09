@@ -1,0 +1,30 @@
+class Solution{
+  public:
+    int minJumps(int arr[], int n){
+        // Your code here
+        
+        int pos = 0;
+        int noOfJumps = 0;
+        
+        while(pos<=n && pos>=0){
+			if(n==1){
+				return noOfJumps;
+			}
+            if(arr[pos] == arr[n-1]){
+				noOfJumps++;
+                return noOfJumps;
+            }
+            
+            pos = pos + arr[pos];
+            noOfJumps++;
+            if(pos>=n-1){
+                noOfJumps++;
+                return noOfJumps;
+            }
+            
+            
+        }
+        
+        return -1;
+    }
+};
