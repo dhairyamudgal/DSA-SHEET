@@ -1,0 +1,40 @@
+#include <bits/stdc++.h> 
+long getTrappedWater(long *arr, int n){
+    
+    long left[n];
+    long right[n];
+    long  highest = INT_MIN;
+    long  ans = 0;
+    long  diff =0;
+
+    if(n==0){
+        return 0;
+    }
+    for(long i=0;i<n;i++){
+        left[i] = max(arr[i], highest);
+        if (arr[i] > highest) {
+          highest = arr[i];
+        }
+    }
+    
+    highest = INT_MIN;
+    for(long  i=n-1;i>=0;i--){
+        right[i] = max(arr[i], highest);
+         if (arr[i] > highest) {
+          highest = arr[i];
+        }
+    }
+
+    for(long i=0;i<n;i++){
+        diff = min(left[i], right[i]);
+       if(diff){
+           ans = ans + (diff - arr[i]);
+       }
+        
+    }
+    
+
+    return ans;
+    
+    
+}

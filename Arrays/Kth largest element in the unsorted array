@@ -1,0 +1,31 @@
+
+#include <bits/stdc++.h> 
+int kthLargest(vector<int>& arr, int size, int K)
+{
+ 	sort(arr.begin(), arr.end(), greater<int>());
+	 if(size<K){
+		 return -1;
+	 }
+	 return arr[K-1];
+	
+	
+}
+
+
+Kth Smallest and Largest Element of Array
+
+#include <bits/stdc++.h> 
+vector<int> kthSmallLarge(vector<int> &arr, int n, int k)
+{
+	sort(arr.begin(), arr.end());
+	int nthLargest = arr[n-k];
+	int nthSmallest = arr[k-1];
+
+	vector<int> ans;
+	ans.push_back(nthSmallest);
+	ans.push_back(nthLargest);
+
+	return ans;
+
+	
+}

@@ -1,0 +1,50 @@
+#include <bits/stdc++.h> 
+
+bool isPossible(vector<int> time, int mid, int n, int m){
+
+	int dayCount = 1;
+	int timeCount = 0;
+
+	for(int i=0;i<m;i++){
+		timeCount = timeCount + time[i];
+		if(timeCount>mid){
+			dayCount++;
+			timeCount=time[i];
+
+		}
+		if(dayCount>n || time[i]>mid){
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+long long ayushGivesNinjatest(int n, int m, vector<int> time) 
+{	
+	int s = 1;
+	int sum = 0;
+	for(int i=0;i<m;i++){
+		sum += time[i];
+	}
+
+	int e = sum;
+	int ans = -1;
+
+	int mid = s +(e-s)/2;
+	while(s<=e){
+		if (isPossible(time, mid,n,m)){
+			ans = mid;
+			e = mid -1;
+		}
+
+		else{
+			s = mid +1;
+		}
+
+		mid = s +(e-s)/2;
+	}
+
+	return mid;
+}
