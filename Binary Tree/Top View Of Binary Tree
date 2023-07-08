@@ -1,0 +1,34 @@
+
+vector<int> getTopView(TreeNode<int> *root) {
+    vector<int> topView;
+
+    if (root == NULL) {
+        return topView;
+    }
+
+    map<int, int> horizontalDistance;  
+    queue<pair<TreeNode<int>*, int>> q; 
+    q.push({root, 0});  
+    while (!q.empty()) {
+        TreeNode<int>* node = q.front().first;
+        int hd = q.front().second;
+        q.pop();
+
+        if (horizontalDistance.find(hd) == horizontalDistance.end()) {
+            horizontalDistance[hd] = node->val;
+        }
+
+        if (node->left != NULL) {
+            q.push({node->left, hd - 1});
+        }
+        if (node->right != NULL) {
+            q.push({node->right, hd + 1});
+        }
+    }
+
+    for (auto it : horizontalDistance) {
+        topView.push_back(it.second);
+    }
+
+    return topView;
+}
