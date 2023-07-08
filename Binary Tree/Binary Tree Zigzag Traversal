@@ -1,0 +1,44 @@
+vector<int> zigZagTraversal(BinaryTreeNode<int> *root)
+{
+    vector<int> v;
+if (root == NULL) {
+        return v;
+    }
+
+    stack<BinaryTreeNode<int>*> currentLevel;
+    stack<BinaryTreeNode<int>*> nextLevel;
+
+    currentLevel.push(root);
+    bool leftToRight = true;
+
+    while (!currentLevel.empty()) {
+        BinaryTreeNode<int> *node = currentLevel.top();
+        currentLevel.pop();
+
+        if (node != NULL) {
+            v.push_back(node -> data);
+
+            if (leftToRight) {
+                if (node->left != NULL) {
+                    nextLevel.push(node->left);
+                }
+                if (node->right != NULL) {
+                    nextLevel.push(node->right);
+                }
+            } else {
+                if (node->right != NULL) {
+                    nextLevel.push(node->right);
+                }
+                if (node->left != NULL) {
+                    nextLevel.push(node->left);
+                }
+            }
+        }
+
+        if (currentLevel.empty()) {
+            leftToRight = !leftToRight;
+            swap(currentLevel, nextLevel);
+        }
+    }
+    return v;
+}
