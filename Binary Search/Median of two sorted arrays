@@ -1,0 +1,101 @@
+/New vector:
+
+double median(vector<int>& a, vector<int>& b) {
+    
+    int n=a.size();
+    int m=b.size();
+ 
+    vector<int> v;
+ 
+    sort(a.begin(),a.end());
+    sort(b.begin(),b.end());
+    int i=0;
+    int j=0;
+    while(i<n&&j<m)
+    {
+        if(a[i]<b[j])
+        {
+            v.push_back(a[i]);
+            i++;
+        }
+        else{
+            v.push_back(b[j]);
+            j++;
+        }
+    }
+ 
+    while(i<n)
+    {
+        v.push_back(a[i]);
+            i++;
+    }
+ 
+    while(j<m)
+    {
+        v.push_back(b[j]);
+            j++;
+    }
+
+
+double med=0;
+int mid=(v.size())/2; 
+if(v.size()%2==0)
+{
+    med=(v[mid]+v[mid-1])/2.00;
+    return med;
+}
+else{
+    med= v[mid];
+    return med;
+}
+ 
+}
+
+// In Place:
+
+double median(vector<int>& a, vector<int>& b) {
+
+	int n1 = a.size();
+	int n2 = b.size();
+	double ans = 0.0;
+	int i = n1-1;
+	int j = n2 -1;
+	int new_size = n1 + n2;
+	a.resize(new_size);
+	int mergerdIndex = new_size -1;
+
+	while(i>=0 && j>=0){
+		if(a[i] > b[j]){
+			a[mergerdIndex] = a[i];
+			i--;
+		}
+		else if(a[i] < b[j]){
+			a[mergerdIndex] = b[j];
+			j--;
+		}
+		mergerdIndex--;
+		
+	}
+
+	while(i>=0){
+		a[mergerdIndex] = a[i];
+		i--;
+	}
+
+	while(j>=0){
+		a[mergerdIndex] = b[j];
+		j--;
+	}
+
+	//merged array is formed
+
+	if((new_size)%2 == 0){
+		ans = (a[new_size/2] + a[(new_size/2) -1])/2.0;
+	}
+	else{
+		ans = a[new_size/2];
+	}
+
+	return ans;
+	
+}
